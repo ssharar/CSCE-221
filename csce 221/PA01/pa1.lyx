@@ -1,0 +1,396 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\size huge
+Report: PA1
+\end_layout
+
+\begin_layout Author
+Shaeeta Sharar
+\end_layout
+
+\begin_layout Section*
+Program Description
+\end_layout
+
+\begin_layout Standard
+The program created was a simple array-based data structure called "My_vec."
+ This structure was meant to mimic the data structure vector found in STL.
+ The vector class performed functions such as finding, inserting, deleting
+ and replacing elements.
+ The vector needed to be dynamic, and thus needed to change in capacity
+ if the size of the vector grew too big.
+ The class also needed to contain a copy constructor, assignment operator,
+ destructor and it had to overload the [] operator as well as the output
+ operator (<<).
+ The vector also had to have the capability of sorting itself from maximum
+ value to minimum and the ability to return the index of the maximum value.
+ All of these features had to work on a vector of type "char" as well as
+ a vector of generic type.
+ 
+\end_layout
+
+\begin_layout Section*
+Purpose of Assignment
+\end_layout
+
+\begin_layout Standard
+The purpose of this assignment was to review basic C++ principles taught
+ in previous courses as well as highlight basic data structure and algorithm
+ implementation.
+ We performed an in-depth exercise in the creation of a simple data structure.
+ Through the creation of a simple My_vec class, we were able to practice
+ our C++ skills and tie in programming to its base of algorithms.
+ 
+\end_layout
+
+\begin_layout Section*
+Data Structure Description and ADT Run-time of the Class My_vec
+\end_layout
+
+\begin_layout Standard
+The functions used were comparatively the same in terms of ADT run-time
+ with their theoretical counterparts.
+ The big-Ohs found for each function are as follows:
+\end_layout
+
+\begin_layout Itemize
+get_size: O(1) 
+\end_layout
+
+\begin_layout Itemize
+get_capacity: O(1) 
+\end_layout
+
+\begin_layout Itemize
+copy constructor: O(n) 
+\end_layout
+
+\begin_layout Itemize
+assignment operator: best - O(1) worst - O(n) 
+\end_layout
+
+\begin_layout Itemize
+elem_at_rank: O(1) 
+\end_layout
+
+\begin_layout Itemize
+overflow_check: best - O(1) worst - O(n) 
+\end_layout
+
+\begin_layout Itemize
+insert_at_rank O(n) 
+\end_layout
+
+\begin_layout Itemize
+replace_at_rank: O(1) 
+\end_layout
+
+\begin_layout Itemize
+remove_at_rank: O(n) 
+\end_layout
+
+\begin_layout Itemize
+find_max_index: O(n) 
+\end_layout
+
+\begin_layout Itemize
+sort_max: O(n
+\begin_inset Formula $^{2}$
+\end_inset
+
+) 
+\end_layout
+
+\begin_layout Standard
+Those listed without a worst or best big-Oh distinction had the same big-Oh
+ for both scenarios.
+ These big-Oh were equal to the theoretical big-Oh values of such functions
+ (as found in the textbook).
+ As stated above, the majority of the big-Oh values found were constant
+ through both the best and worst case of the function.
+ The best case over-all would be to assign a vector only to itself and insert
+ and replace elements only within the range first created.
+ Also, not using the sort function would lower the run-time as it implements
+ a selection sort algorithm and thus has a O(n
+\begin_inset Formula $^{2}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Section*
+Insturctions to Compile and Run Program; Input and Output Specifications
+\end_layout
+
+\begin_layout Standard
+All files provided (My_vec.h, My_vec.cpp, main.cpp or in the case of the template
+ My_vec_template.h and template_main.cpp) must first be placed in the same
+ directory.
+ Using the PUTTY terminal, change directories to match the one that contains
+ the files.
+ Then, either execute the code by typing the "g++ -std=c++11 *.cpp" command
+ or by using "make all." If using the g++ method, run the program with "./a.out,"
+ if using the other method run the program by executing "./Main".
+ There are no user inputs for this program.
+ If correctly compiled and executed the program will print out various tests
+ for the My_vec class and its functions.
+ All inputs for the program are included in the main.cpp as a part of the
+ code.
+ These inputs are the values inside each vector.
+ 
+\end_layout
+
+\begin_layout Section*
+Logical Exceptions and Bug Description
+\end_layout
+
+\begin_layout Standard
+Due to the nature of most functions used, most exceptions in the program
+ check for range errors.
+ One such example would be the elem_at_rank() function which returns the
+ value of an element at the rank inputted.
+ This function first checks to see if the integer of the rank is inside
+ the capacity of the vector.
+ If the element is out of bounds, it displays an error.
+ The function overflow_check() is used when the vector needs to increase
+ in size, the exception to which being the vector does not need to grow
+ in size and the function does nothing.
+ Additionally if a new vector is created to increase the size, this function
+ make sure to delete the old vector preventing leaks.
+ This function is used as an exception in the insert_at_rank() and remove_at_ran
+k() functions which call upon overlfow_check() when the rank provided is
+ out of bounds.
+ In the template version of the class My_vec, the copy constructor does
+ not allow for two different type of vectors to be set equal to each other.
+ This ensures that two incompatible vectors are not being set equal to each
+ other.
+ A Bug that could occur with such a program would be the misuse of the []
+ operator.
+ Due to the nature of the [] operator, it is possible to assign values to
+ the vector at a given rank using this operator.
+ Unlike the insert_at_rank() function, this operator does not increase in
+ size if a rank that is out of bounds is called.
+ Instead it does nothing.
+ This could cause errors for someone implementing the [] operator to assign
+ values.
+\end_layout
+
+\begin_layout Section*
+C++ Object Oriented and Generic Programming Features, C++11 Features
+\end_layout
+
+\begin_layout Standard
+For this program, creating a class was the main objective.
+ This itself was an implementation of C++ object oriented features.
+ Inside the class object, abstraction of private and public functions and
+ variables were used.
+ Polymorphism of the [] operator as well as overloading the [] and the output
+ operator were other object oriented implementations.
+ In the template version of the My_vec class, encapsulation of the function
+ definitions in the header file was used as a feature of template classes.
+ As for generic programming, the c++ template was used to make the My_vec
+ class generic.
+ The class was declared as a template and all variables were changed to
+ use the template type T.
+ The main component of c++ 11 that was used was the nullptr.
+ This pointer was used to check for empty arrays in the heap.
+ 
+\end_layout
+
+\begin_layout Section*
+Testing Results
+\end_layout
+
+\begin_layout Standard
+Pictured are the outputs for each run.
+ The first is the My_vec with only char properties, the second is My_vec
+ with template properties.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvecim1.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvecim2.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvecim3.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvecim4.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp1.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp2.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp3.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp5.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp8.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp10.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /Volumes/SHINDONG/myvectemp11.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document

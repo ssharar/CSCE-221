@@ -1,0 +1,150 @@
+//DEVINS//
+#include "BinaryNode.h"
+#include <iostream>
+#include <queue> 
+
+class BinaryTree {
+
+	BinaryNode *root;
+	void deleteTree(BinaryNode *root);
+		
+public:
+	//Constructor and Destructor
+	BinaryTree() {root = NULL;}
+	BinaryTree(int el) {root = new BinaryNode(el);}
+	~BinaryTree() {deleteTree(root); root = NULL;}
+	
+	//Functions
+	BinaryNode *getRoot() {return root;}
+	bool isEmp() {return root == NULL;}
+	int size() {return (root == NULL) ? 0 : root->size(root);}
+	int height() {return (root == NULL) ? 0 : root->height(root);}
+	double search_cost(BinaryNode *root, int *cost);
+	
+	void copy(BinaryTree& rhs)	
+	{
+		if (this != &rhs)
+		{
+			deleteTree(root);
+			if (rhs.root != NULL) root = rhs.root->copy();
+		}
+	}
+	
+	void merge(int rItem, BinaryTree& T1, BinaryTree& T2);
+	
+	
+	BinaryNode* findMin(BinaryNode *t);
+	BinaryNode* removeMin(BinaryNode *t);
+	void insert(int x);
+	BinaryNode* remove(int x, BinaryNode *t);/*
+	void insert(int x) //throw(DuplicateItem)
+	{ root = insert(x, root, count); }
+	void remove(int x) //throw(ItemNotFound)
+	{ root = remove(x, root); }*/
+	
+};
+
+double search_cost(BinaryNode *t, int *cost)
+{
+	*cost = *cost + t->getSC();
+	if (t->left != NULL)
+		search_cost(t->left,cost);
+	if (t->right != NULL)
+		search_cost(t->right,cost);
+	return (double)(*cost) / (double)(size());
+}
+
+BinaryNode *BinaryTree::findMin(BinaryNode *t)
+{
+	if (t == NULL) ;
+	while (t->left != NULL) t = t->left;
+	return t;
+}
+
+BinaryNode *BinaryTree::removeMin(BinaryNode *t)
+{
+	if (t == NULL) ;
+	if (t->left != NULL)
+		t->left = removeMin(t->left);
+	else
+	{
+		BinaryNode *node = t;
+		t = t->right;
+		delete node;
+	}
+	return t;
+}
+
+//Recursion for insert
+void recIn(BinaryNode *t, int x, int comp)
+{
+	++comp;
+	if (x < t->getElem())
+	{
+		if (t->left == NULL)
+			t->left = new BinaryNode(x, comp);
+		else
+			recIn(t->left, x, comp);
+	}
+	else
+	{
+		if (t->right == NULL)
+			t->right = new BinaryNode(x, comp);
+		else
+			recIn(t->right, x, comp);
+	}
+}
+
+void BinaryTree::insert(int x)
+{
+	BinaryNode *temp = root;
+	if (root == NULL)
+		root = new BinaryNode(x);
+	else
+		recIn(root, el, 1);
+}
+
+BinaryNode *BinaryTree::remove(int x, BinaryNode *t)
+{
+	if (t == NULL) ;
+	
+	if (x < t->elem)
+		t->left = remove(x, t->left);
+	else if (x > t->elem)
+		t->right = insert(x, t->right);
+	else if (t->left != NULL && t->right != NULL)
+	{
+		t->elem = findMin(t->right)->elem;
+		t->right = removeMin(t->right);
+	}
+	else
+	{
+		BinaryNode *node = t;
+		t = (t->left != NULL) ? t->left : t->right;
+		delete node;
+	}
+	
+	return t;
+}
+
+void BinaryTree::merge(int rItem, BinaryTree& T1, BinaryTree& T2)
+{
+	if (T1.root == T2.root && T1.root != NULL)
+	{
+		cerr << "Left tree is equal to the right tree and so merge was not completed." << endl;
+	}
+	
+	if (this != &T1 && this != &T2) deleteTree(root);
+	root = new BinaryNode(rItem, T1.root, T2.root);
+	
+	if (this != &T1) T1.root = NULL;
+	if (this != &T2) T2.root = NULL;
+}
+
+void BinaryTree::deleteTree(BinaryNode *root)
+{
+	if (root == NULL) return;
+	if (root->left !=NULL) deleteTree(root->left);
+	if (root->right != NULL) deleteTree(root->right);
+	delete root;
+}

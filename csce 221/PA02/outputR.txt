@@ -1,0 +1,26 @@
+while 
+for 1
+2for 1
+3for 1
+6for 1
+5for 1
+9for 1
+1for 1
+2for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 2 
+for 4
+for 4
+for 4
+for 4
+for 4
+for 4
+for 4
+Running time: 0 ms
